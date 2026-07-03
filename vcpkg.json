@@ -1,0 +1,10 @@
+{
+  "name" : "spotandfuturesarbitrage",
+  "version" : "1.0.0",
+  "dependencies": [
+    "boost",
+    "boost-system",
+    "openssl",
+    "rapidjson"
+  ]
+}
