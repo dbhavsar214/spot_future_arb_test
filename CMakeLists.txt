@@ -9,7 +9,8 @@ find_package(RapidJSON CONFIG REQUIRED)
 
 
 add_executable(SpotandFuturesArbitrage main.cpp
-        src/WebsocketConnection.cpp)
+        include/web_socket_connection.hpp
+        src/web_socket_connection.cpp)
 
 target_include_directories(SpotandFuturesArbitrage PRIVATE
         ${CMAKE_SOURCE_DIR}/include
