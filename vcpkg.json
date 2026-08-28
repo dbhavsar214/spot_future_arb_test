@@ -5,6 +5,7 @@
     "boost",
     "boost-system",
     "openssl",
-    "rapidjson"
+    "rapidjson",
+    "libpqxx"
   ]
 }

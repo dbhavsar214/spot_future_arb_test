@@ -2,13 +2,16 @@
 #include <iostream>
 
 session::session(net::io_context& ioc,
-                               std::string host,
-                               std::string stream)
+                 std::string host,
+                 std::string stream,
+                 tick_handler& market_handler)
     : resolver_(net::make_strand(ioc))
     , ctx_(ssl::context::tls_client)
     , ws_(net::make_strand(ioc), ctx_)
     , host_(std::move(host))
     , stream_(std::move(stream))
+    ,market_handler_(market_handler)
+
 {
     ctx_.set_default_verify_paths();
 }
@@ -104,9 +107,9 @@ void session::on_read(beast::error_code ec, std::size_t)
     std::string msg =
         beast::buffers_to_string(buffer_.data());
 
-    buffer_.consume(buffer_.size());
+    market_handler_.update_tick(msg);
 
-    std::cout << "Tick: " << msg << std::endl;
+    buffer_.consume(buffer_.size());
 
     ws_.async_read(
         buffer_,
