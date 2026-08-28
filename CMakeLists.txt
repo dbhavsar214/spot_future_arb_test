@@ -10,13 +10,9 @@ find_package(libpqxx CONFIG REQUIRED)
 
 add_executable(SpotandFuturesArbitrage main.cpp
         src/web_socket_connection.cpp
-        include/tick_handler.hpp
         src/tick_handler.cpp
-        include/server.hpp
         src/server.cpp
-        include/arbitrage_checker.hpp
         src/arbitrage_checker.cpp
-        include/db_connection.hpp
         src/db_connection.cpp
 )
 
