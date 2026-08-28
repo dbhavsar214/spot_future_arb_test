@@ -11,7 +11,9 @@
 #include <boost/beast/ssl.hpp>
 #include <memory>
 #include <string>
-#include <functional>
+
+#include "tick_handler.hpp"
+
 
 namespace beast = boost::beast;
 namespace websocket = beast::websocket;
@@ -24,7 +26,10 @@ class session : public std::enable_shared_from_this<session>
 public:
     explicit session(net::io_context& ioc,
                             std::string host,
-                            std::string stream);
+                            std::string stream,
+                            tick_handler& market_handler
+                            );
+
 
     void run();
 
@@ -46,6 +51,8 @@ private:
     beast::flat_buffer buffer_;
 
     std::string host_;
-    std::string stream_;};
+    std::string stream_;
+    tick_handler& market_handler_;
+};
 
 #endif //SPOTANDFUTURESARBITRAGE_WEB_SOCKET_CONNECTION_HPP
